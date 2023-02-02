@@ -1,0 +1,9 @@
+.termek {
+    border: 1px solid gray;
+    width: 150px;
+    float: left;
+    background-color: aliceblue;
+    height: 150px;
+    margin: 20px;
+    padding: 20px;
+}

@@ -1,0 +1,38 @@
+<!--<app-termek 
+    *ngFor="let termek of termekek" 
+    [termek]="termek">
+
+</app-termek>
+-->
+
+
+<table mat-table [dataSource]="termekek">
+    <ng-container matColumnDef="nev">
+        <th mat-header-cell *matHeaderCellDef> Termék név </th>
+        <td mat-cell *matCellDef="let element"> {{element.nev}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ar">
+        <th mat-header-cell *matHeaderCellDef> Termék ára </th>
+        <td mat-cell *matCellDef="let element"> {{element.ar}}.-Ft </td>
+    </ng-container>
+    <ng-container matColumnDef="leiras">
+        <th mat-header-cell *matHeaderCellDef> Részletek</th>
+        <td mat-cell *matCellDef="let element"> {{element.leiras}} </td>
+    </ng-container>
+    <ng-container matColumnDef="kedvezmeny">
+        <th mat-header-cell *matHeaderCellDef> Kedvezmény</th>
+        <td mat-cell *matCellDef="let element"> -{{element.kedvezmeny*100}}% </td>
+    </ng-container>
+    <ng-container matColumnDef="csokkentett_ar">
+        <th mat-header-cell *matHeaderCellDef> Csökkentett ár</th>
+        <td mat-cell *matCellDef="let element"> {{element.ar*(1-element.kedvezmeny)}} .-Ft </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+</mat-paginator>

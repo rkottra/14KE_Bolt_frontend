@@ -1,0 +1,11 @@
+<div class="termek">
+    <h3>{{termek?.nev}}</h3>
+    <span>{{termek?.ar}}. -Ft</span>
+    
+    <div *ngIf="termek!.kedvezmeny > 0">Fantasztikus kedvezmények: 
+        <b>-{{termek?.kedvezmeny!*100}}%</b>
+        <br>
+        Csökkentett ár: <b>{{termek?.ar!*(1-termek?.kedvezmeny!)}}. -Ft</b>
+    </div>
+    
+</div>
