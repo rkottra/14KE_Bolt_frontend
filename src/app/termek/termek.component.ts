@@ -4,7 +4,7 @@ import { TermekModel } from '../models/termek-model';
 @Component({
   selector: 'app-termek',
   templateUrl: './termek.component.html',
-  styleUrls: ['./termek.component.css']
+  styleUrls: ['./termek.component.scss']
 })
 export class TermekComponent implements OnInit {
 

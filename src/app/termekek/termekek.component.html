@@ -5,14 +5,15 @@
 </app-termek>
 -->
 
+<input (change)="filterTable($event)" type="text" [(ngModel)]="searchField" />
 
-<table mat-table [dataSource]="termekek">
+<table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="nev">
-        <th mat-header-cell *matHeaderCellDef> Termék név </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Termék név </th>
         <td mat-cell *matCellDef="let element"> {{element.nev}} </td>
     </ng-container>
     <ng-container matColumnDef="ar">
-        <th mat-header-cell *matHeaderCellDef> Termék ára </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Termék ára </th>
         <td mat-cell *matCellDef="let element"> {{element.ar}}.-Ft </td>
     </ng-container>
     <ng-container matColumnDef="leiras">
@@ -26,6 +27,10 @@
     <ng-container matColumnDef="csokkentett_ar">
         <th mat-header-cell *matHeaderCellDef> Csökkentett ár</th>
         <td mat-cell *matCellDef="let element"> {{element.ar*(1-element.kedvezmeny)}} .-Ft </td>
+    </ng-container>
+    <ng-container matColumnDef="kepUrl">
+        <th mat-header-cell *matHeaderCellDef> Kép</th>
+        <td mat-cell *matCellDef="let element"><img [src]="element.kepUrl" /></td>
     </ng-container>
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
