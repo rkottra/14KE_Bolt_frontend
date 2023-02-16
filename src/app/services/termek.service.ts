@@ -19,7 +19,7 @@ export class TermekService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer 8|DFq3RUcIogXQ1B1K1KxG7QunaKiwBw5VzOI4U6NH`
+      'Authorization': `Bearer 9|AvZHeQJlM6be25LdvVm2BVbms6o4ZU0DjDSCUHNW`
     })
     return this.http.get<string>("http://localhost:8000/api/dashboard", { headers: headers });
   }

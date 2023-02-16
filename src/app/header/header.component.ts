@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   }
 
   kattint() {
+    
       this.backend.dashboard().subscribe((data)=> {
         this.valtozo = data;
       })
