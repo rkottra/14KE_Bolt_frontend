@@ -8,7 +8,7 @@ import { TermekService } from '../services/termek.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public valtozo:string = "asd";
+  public valtozo =  "";
 
   constructor(private backend:TermekService) { }
 
@@ -16,9 +16,15 @@ export class HeaderComponent implements OnInit {
   }
 
   kattint() {
-    
-      this.backend.dashboard().subscribe((data)=> {
-        this.valtozo = data;
+      this.valtozo = "";
+      
+      this.backend.dashboard().subscribe((data:any)=> {
+        console.log(data);
+        this.valtozo = data.valasz;
+      },
+      (err) => {
+        console.error(err);
+        this.backend.logoutLocal();
       })
   }
 

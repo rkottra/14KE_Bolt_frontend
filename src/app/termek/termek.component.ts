@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TermekModel } from '../models/termek-model';
 
 @Component({
@@ -8,9 +9,11 @@ import { TermekModel } from '../models/termek-model';
 })
 export class TermekComponent implements OnInit {
 
-  @Input() termek:TermekModel | undefined;
+  public termek:TermekModel | undefined;
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: TermekModel) { 
+    this.termek = this.data;
+  }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,6 @@
-<div class="termek">
-    <h3>{{termek?.nev}}</h3>
+<h2 mat-dialog-title>{{termek?.nev}} adatai</h2>
+<mat-dialog-content class="mat-typography">
+<div>
     <span>{{termek?.ar}}. -Ft</span>
     
     <div *ngIf="termek!.kedvezmeny > 0">Fantasztikus kedvezmények: 
@@ -7,5 +8,9 @@
         <br>
         Csökkentett ár: <b>{{termek?.ar!*(1-termek?.kedvezmeny!)}}. -Ft</b>
     </div>
-    
 </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Vissza</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Mentés</button>
+</mat-dialog-actions>

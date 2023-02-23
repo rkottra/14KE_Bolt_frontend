@@ -1,0 +1,8 @@
+<fieldset *ngIf="!this.backend.isLoggedIn">
+    <legend>Login</legend>
+    <label for="email">E-mail: </label>
+    <input type="text" id="email" [(ngModel)]="email" />
+    <label for="password">Password: </label>
+    <input type="password" id="password" [(ngModel)]="password" />
+    <input type="button" (click)="sendLogin()" value="Login"/>  
+</fieldset>
