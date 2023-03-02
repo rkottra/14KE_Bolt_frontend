@@ -5,4 +5,5 @@ export interface TermekModel {
     leiras  : string;
     ar      : number;
     kedvezmeny:number;
+    kategoriaid:number;
 }

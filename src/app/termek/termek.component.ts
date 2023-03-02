@@ -1,6 +1,8 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { KategoriaModel } from '../models/kategoria-model';
 import { TermekModel } from '../models/termek-model';
+import { TermekService } from '../services/termek.service';
 
 @Component({
   selector: 'app-termek',
@@ -9,13 +11,32 @@ import { TermekModel } from '../models/termek-model';
 })
 export class TermekComponent implements OnInit {
 
-  public termek:TermekModel | undefined;
+  public termek:TermekModel = 
+  {nev:'', ar:0, id:-1, kedvezmeny:0, kepUrl:'', leiras:'',
+    kategoriaid:1};
+  public kategoriak: KategoriaModel[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: TermekModel) { 
-    this.termek = this.data;
+  constructor(
+    public dialogRef: MatDialogRef<TermekComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TermekModel,
+    private termekszerviz: TermekService) { 
+
+    if (this.data !== null) {
+      this.termek = this.data;
+    }
+
+    this.termekszerviz.selectKategoriak().subscribe((data)=>{
+      this.kategoriak = data;
+    });
+
   }
 
   ngOnInit(): void {
   }
+
+  mentes() {
+    this.dialogRef.close();
+  }
+  
 
 }

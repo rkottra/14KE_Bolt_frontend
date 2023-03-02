@@ -1,16 +1,55 @@
-<h2 mat-dialog-title>{{termek?.nev}} adatai</h2>
+<h2 mat-dialog-title>{{termek.nev}} adatai</h2>
 <mat-dialog-content class="mat-typography">
 <div>
-    <span>{{termek?.ar}}. -Ft</span>
-    
-    <div *ngIf="termek!.kedvezmeny > 0">Fantasztikus kedvezmények: 
-        <b>-{{termek?.kedvezmeny!*100}}%</b>
-        <br>
-        Csökkentett ár: <b>{{termek?.ar!*(1-termek?.kedvezmeny!)}}. -Ft</b>
-    </div>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="nev">Név: </mat-label>
+    <input type="text"  matInput id="leneviras" [(ngModel)]="termek.nev" name="nev" >
+  </mat-form-field>
+  <br>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="leiras">Leírás: </mat-label>
+    <textarea  matInput id="leiras" [(ngModel)]="termek.leiras" name="leiras" >
+    </textarea>
+  </mat-form-field>
+  <br>
+  
+  <mat-form-field appearance="fill">
+    <mat-label for="ar">Ár: </mat-label>
+    <input  matInput  type="number" id="ar" [(ngModel)]="termek.ar" name="ar" />
+    <span matSuffix>.-Ft</span>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field appearance="fill">
+    <mat-label for="kedvezmeny">Kedvezmény: </mat-label>
+    <input matInput  type="number" id="kedvezmeny" 
+          [ngModel]="termek.kedvezmeny*100| number:'1.0-1'" 
+          (ngModelChange)="termek.kedvezmeny=$event/100"name="kedvezmeny" 
+          min="0" max="100"/>
+    <span matSuffix>%</span>
+    <br>
+
+    <span *ngIf="termek.kedvezmeny" >
+      <mat-label for="kedvezmenyesar">Kedvezményes ár: </mat-label>
+      <span>{{termek.ar!*(1-termek.kedvezmeny!)}}.-Ft</span>
+    </span>
+  </mat-form-field>
+  
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Kategória</mat-label>
+    <mat-select [(value)]="termek.kategoriaid">
+      <mat-option *ngFor="let kategoria of kategoriak" [value]="kategoria.id">
+        {{kategoria.nev}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
 </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Vissza</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Mentés</button>
+  <button mat-button [mat-dialog-close]="termek" cdkFocusInitial>Mentés</button>
 </mat-dialog-actions>

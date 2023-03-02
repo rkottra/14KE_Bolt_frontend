@@ -8,14 +8,12 @@ import { TermekService } from '../services/termek.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public valtozo =  "";
-
   constructor(private backend:TermekService) { }
 
   ngOnInit(): void {
   }
 
-  kattint() {
+  /*kattint() {
       this.valtozo = "";
       
       this.backend.dashboard().subscribe((data:any)=> {
@@ -26,6 +24,6 @@ export class HeaderComponent implements OnInit {
         console.error(err);
         this.backend.logoutLocal();
       })
-  }
+  }*/
 
 }

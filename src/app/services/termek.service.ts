@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { KategoriaModel } from '../models/kategoria-model';
 import { TermekModel } from '../models/termek-model';
 
 
@@ -8,57 +9,35 @@ import { TermekModel } from '../models/termek-model';
   providedIn: 'root'
 })
 export class TermekService {
-  
-
-  private token:string = "";
-  public isLoggedIn = false;
 
   constructor(private http:HttpClient) { 
-    if ( sessionStorage.getItem("token") != null) {
-      this.token = sessionStorage.getItem("token")??"";
-      this.isLoggedIn = true;
-    }
   }
 
-  index():Observable<TermekModel[]> {
+
+  selectKategoriak():Observable<KategoriaModel[]> {
+    return this.http.get<KategoriaModel[]>("http://localhost:8000/api/kategoria");
+  }
+  selectTermek():Observable<TermekModel[]> {
     return this.http.get<TermekModel[]>("http://localhost:8000/api/termek");
   }
 
-  login(email:string, password:string) {
-    this.isLoggedIn = false;
-
-    this.http.post("http://localhost:8000/api/login", {email: email, password:password}).subscribe((data:any) => {
-      
-      this.token = data.token;
-      this.isLoggedIn = true;
-      sessionStorage.setItem("token", this.token);
-    });
+  updateTermek(termek: TermekModel) {
+    return this.http.patch("http://localhost:8000/api/termek/"+termek.id, termek);
   }
 
-  logoutLocal() {
-    this.isLoggedIn = false;
-    this.token = "";
-    sessionStorage.removeItem("token");
+  insertTermek(termek: TermekModel) {
+    let seged = {
+      nev : termek.nev,
+      ar : termek.ar,
+      leiras : termek.leiras,
+      kedvezmeny : termek.kedvezmeny,
+      kategoriaid : termek.kategoriaid,
+    }
+    return this.http.post("http://localhost:8000/api/termek", seged);
   }
 
-  logout() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer `+this.token
-    });
-
-    this.http.post("http://localhost:8000/api/logout", {}, {headers}).subscribe();
-
-    this.logoutLocal();
-  }
-
-  dashboard():Observable<string> {
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer `+this.token
-    })
-    return this.http.get<string>("http://localhost:8000/api/dashboard", { headers: headers });
+  deleteTermek(termek: TermekModel) {
+    return this.http.delete("http://localhost:8000/api/termek/"+termek.id);
   }
 }
 

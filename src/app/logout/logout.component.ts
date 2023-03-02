@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../services/login.service';
 import { TermekService } from '../services/termek.service';
 
 @Component({
@@ -9,13 +10,13 @@ import { TermekService } from '../services/termek.service';
 export class LogoutComponent implements OnInit {
   
 
-  constructor(public backend:TermekService) { }
+  constructor(public loginszerviz:LoginService) { }
 
   ngOnInit(): void {
   }
 
   sendLogout() {
-    this.backend.logout();
+    this.loginszerviz.logout();
   }
 
 }
