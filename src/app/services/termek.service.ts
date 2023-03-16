@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { KategoriaModel } from '../models/kategoria-model';
 import { TermekModel } from '../models/termek-model';
+import { LoginService } from './login.service';
 
 
 @Injectable({
@@ -12,7 +13,6 @@ export class TermekService {
 
   constructor(private http:HttpClient) { 
   }
-
 
   selectKategoriak():Observable<KategoriaModel[]> {
     return this.http.get<KategoriaModel[]>("http://localhost:8000/api/kategoria");

@@ -12,8 +12,7 @@ import { TermekService } from '../services/termek.service';
 export class TermekComponent implements OnInit {
 
   public termek:TermekModel = 
-  {nev:'', ar:0, id:-1, kedvezmeny:0, kepUrl:'', leiras:'',
-    kategoriaid:1};
+    {nev:'', ar:0, id:-1, kedvezmeny:0, kepUrl:'', leiras:'',kategoriaid:1};
   public kategoriak: KategoriaModel[] = [];
 
   constructor(
@@ -22,7 +21,13 @@ export class TermekComponent implements OnInit {
     private termekszerviz: TermekService) { 
 
     if (this.data !== null) {
-      this.termek = this.data;
+      this.termek.ar = this.data.ar;
+      this.termek.id = this.data.id;
+      this.termek.kategoriaid = this.data.kategoriaid;
+      this.termek.kedvezmeny = this.data.kedvezmeny;
+      this.termek.kepUrl = this.data.kepUrl;
+      this.termek.leiras = this.data.leiras;
+      this.termek.nev = this.data.nev;
     }
 
     this.termekszerviz.selectKategoriak().subscribe((data)=>{
@@ -33,10 +38,4 @@ export class TermekComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  mentes() {
-    this.dialogRef.close();
-  }
-  
-
 }

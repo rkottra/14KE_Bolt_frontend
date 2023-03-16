@@ -9,7 +9,7 @@ import { TermekService } from '../services/termek.service';
 })
 export class LoginComponent implements OnInit {
   
-  public email: string = "valaki@jedlik.eu";
+  public email: string = "kottra.richard@jedlik.eu";
   public password: string = "";
 
   constructor(public loginszerviz:LoginService) { }

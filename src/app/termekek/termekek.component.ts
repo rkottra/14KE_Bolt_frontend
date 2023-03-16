@@ -54,7 +54,21 @@ export class TermekekComponent implements OnInit {
       width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.termekszerviz.updateTermek(result).subscribe();
+      if ( result != "") {
+        this.termekszerviz.updateTermek(result).subscribe( {
+            next: (data) => {
+              termek.ar = result.ar;
+              termek.nev = result.nev;
+              termek.id = result.id;
+              termek.kategoriaid = result.kategoriaid;
+              termek.kepUrl = result.kepUrl;
+              termek.leiras = result.leiras;
+            },
+            error: (e) => {
+              //console.log(e);
+            }
+          });
+      }
     });
   }
 
